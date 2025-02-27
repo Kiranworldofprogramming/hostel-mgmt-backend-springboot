@@ -10,19 +10,18 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="REST_STUDENT")
-public class Student {
+@Table(name="REST_ROOM")
+public class Room {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	@Column(length=20)
-	private String firstName;
-	@Column(length=20)
-	private String lastName;
-	@Column
-	private Long regdNo;
+	private int id;
 	@Column
 	private String roomNo;
+	@Column
+	private int maxCapacity;
+	@Column
+	private int occupied;
 	
 
 }

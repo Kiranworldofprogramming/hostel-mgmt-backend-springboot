@@ -1,6 +1,9 @@
 package com.nt.rest;
 
+
+import java.util.Date;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.nt.model.Student;
 import com.nt.service.IStudentMgmtService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/student/api")
 public class StudentOperationsController {
@@ -44,6 +46,7 @@ public class StudentOperationsController {
 	public ResponseEntity<?> fetchAllStudents(){
 		try {
 			Iterable<Student> list=studService.getAllStudents();
+			System.out.println(new Date().getTime());
 			return new ResponseEntity<Iterable<Student>>(list,HttpStatus.OK);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -98,9 +101,6 @@ public class StudentOperationsController {
 		}
 	}
 	
-	
-	
-	
-	
+
 	
 }

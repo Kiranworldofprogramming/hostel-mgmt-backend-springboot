@@ -3,7 +3,11 @@ package com.nt.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nt.model.Student;
 import com.nt.repository.IStudentRepo;
@@ -51,6 +55,27 @@ public class StudentMgmtServiceImpl implements IStudentMgmtService{
 	@Override
 	public List<Student> getByRoomNumber(String roomno) {
 		return studRepo2.findByRoomNo(roomno);
+	}
+
+	@Override
+	public Page<Student> getAllStudents(int page, int size) {
+		return studRepo2.findAll(PageRequest.of(page, size));
+	}
+
+	@Override
+	public Student getDetails(long regdNo) {
+		return studRepo2.findByid(regdNo).orElseThrow(() -> new RuntimeException("student not found"));
+	}
+
+	@Override
+	public void deleteStudent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String uploadPhoto(long regdNo, MultipartFile file) {
+		return "";
 	}
 
 	

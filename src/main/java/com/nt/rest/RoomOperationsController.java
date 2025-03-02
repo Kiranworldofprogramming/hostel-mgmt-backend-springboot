@@ -1,12 +1,15 @@
 package com.nt.rest;
 
 import java.util.List;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +24,7 @@ import com.nt.service.IRoomMgmtService;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/room/api")
+@EnableScheduling
 public class RoomOperationsController {
 	@Autowired
 	private IRoomMgmtService roomService;
@@ -34,6 +38,11 @@ public class RoomOperationsController {
 			e.printStackTrace();
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@GetMapping("/time")
+	public String getCurrentTime() {
+		return roomService.getTime();
 	}
 	
 	@GetMapping("/report")

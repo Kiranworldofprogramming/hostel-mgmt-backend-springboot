@@ -18,5 +18,7 @@ public interface IRoomMgmtService {
 	public String isRoomAvailable(String roomNo);
 	
 	public Page<Room> generateReport(int pageNo,int pageSize,boolean asc,String...props);
+	
+	public String getTime();
 
 }

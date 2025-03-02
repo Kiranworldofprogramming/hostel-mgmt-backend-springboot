@@ -2,6 +2,7 @@ package com.nt.service;
 
 
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.nt.exception.RoomNotFoundException;
@@ -78,6 +80,13 @@ public class RoomMgmtServiceImpl implements IRoomMgmtService {
 		Pageable pageable=PageRequest.of(pageNo, pageSize,Sort.by(asc?Direction.ASC:Direction.DESC, props));
 		Page<Room> page=pagingRepo.findAll(pageable);
 		return page;
+	}
+
+	@Override
+	@Scheduled(fixedRate = 3000)
+	public String getTime() {
+		System.out.print("Method is called");
+		return "Current time : " + LocalTime.now();
 	}
 
 	
